@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Dashboard | GlucoAI</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav>
+
+<div class="logo">
+<i class="fa-solid fa-heart-pulse"></i>
+GlucoAI
+</div>
+
+<ul>
+<li><a href="/">Home</a></li>
+<li><a href="/predict">Prediction</a></li>
+<li><a href="/history">History</a></li>
+<li><a href="/dashboard">Dashboard</a></li>
+<li><a href="/about">About</a></li>
+</ul>
+
+</nav>
+
+<!-- ================= TITLE ================= -->
+
+<h1 class="dashboard-title">
+📊 GlucoAI Healthcare Dashboard
+</h1>
+
+<!-- ================= CARDS ================= -->
+
+<div class="cards">
+
+<div class="card blue">
+<i class="fa-solid fa-users"></i>
+<h3>Total Patients</h3>
+<h1>{{ total }}</h1>
+</div>
+
+<div class="card red">
+<i class="fa-solid fa-heart-circle-xmark"></i>
+<h3>Diabetic</h3>
+<h1>{{ diabetic }}</h1>
+</div>
+
+<div class="card green">
+<i class="fa-solid fa-heart-circle-check"></i>
+<h3>Healthy</h3>
+<h1>{{ non_diabetic }}</h1>
+</div>
+
+<div class="card orange">
+<i class="fa-solid fa-weight-scale"></i>
+<h3>Average BMI</h3>
+<h1>{{ avg_bmi }}</h1>
+</div>
+
+<div class="card purple">
+<i class="fa-solid fa-vial"></i>
+<h3>Average HbA1c</h3>
+<h1>{{ avg_hba1c }}</h1>
+</div>
+
+</div>
+
+<!-- ================= CHARTS ================= -->
+
+<div class="charts">
+
+<div class="chart-box">
+
+<h2>Diabetic vs Healthy</h2>
+
+<canvas id="pieChart"></canvas>
+
+</div>
+
+<div class="chart-box">
+
+<h2>Patient Statistics</h2>
+
+<canvas id="barChart"></canvas>
+
+</div>
+
+</div>
+
+<!-- ================= QUICK ACTION ================= -->
+
+<section class="quick-actions">
+
+<h2>Quick Actions</h2>
+
+<div class="action-buttons">
+
+<a href="/predict" class="action-btn">
+<i class="fa-solid fa-user-plus"></i>
+New Prediction
+</a>
+
+<a href="/history" class="action-btn">
+<i class="fa-solid fa-clock-rotate-left"></i>
+History
+</a>
+
+<a href="/download_pdf" class="action-btn">
+<i class="fa-solid fa-file-pdf"></i>
+Download PDF
+</a>
+
+</div>
+
+</section>
+
+<!-- ================= STATUS ================= -->
+
+<div class="status-card">
+
+<h2>System Status</h2>
+
+<p>🟢 Database Connected</p>
+
+<p>🤖 AI Model Loaded Successfully</p>
+
+<p>💾 MySQL Storage Active</p>
+
+<p>📄 PDF Report Enabled</p>
+
+</div>
+
+<!-- ================= CHART JS ================= -->
+
+<script>
+
+const pieCtx=document.getElementById("pieChart");
+
+new Chart(pieCtx,{
+type:"pie",
+data:{
+labels:["Diabetic","Healthy"],
+datasets:[{
+data:[{{ diabetic }},{{ non_diabetic }}],
+backgroundColor:[
+"#e53935",
+"#43a047"
+]
+}]
+},
+options:{
+responsive:true
+}
+});
+
+const barCtx=document.getElementById("barChart");
+
+new Chart(barCtx,{
+type:"bar",
+data:{
+labels:["Total","Diabetic","Healthy"],
+datasets:[{
+label:"Patients",
+data:[
+{{ total }},
+{{ diabetic }},
+{{ non_diabetic }}
+],
+backgroundColor:[
+"#1976d2",
+"#e53935",
+"#43a047"
+]
+}]
+},
+options:{
+responsive:true,
+plugins:{
+legend:{
+display:false
+}
+},
+scales:{
+y:{
+beginAtZero:true
+}
+}
+}
+});
+
+</script>
+
+</body>
+
+</html>
+
+

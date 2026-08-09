@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Prediction History | GlucoAI</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='style.css') }}">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+
+</head>
+
+<body>
+
+<nav>
+
+<div class="logo">
+<i class="fa-solid fa-heart-pulse"></i>
+GlucoAI
+</div>
+
+<ul>
+
+<li><a href="/">Home</a></li>
+
+<li><a href="/predict">Prediction</a></li>
+
+<li><a href="/history">History</a></li>
+
+<li><a href="/about">About</a></li>
+
+<li><a href="/login">Login</a></li>
+
+</ul>
+
+</nav>
+
+<section class="history-page">
+
+<h1>Prediction History</h1>
+
+<p>All patient prediction records stored in MySQL.</p>
+
+<!-- SEARCH FORM -->
+
+<form action="/history" method="GET" class="search-box">
+
+<input
+type="text"
+name="search"
+placeholder="Search Patient Name..."
+value="{{ search if search else '' }}">
+
+<button type="submit">
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+Search
+
+</button>
+
+</form>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+<th>Name</th>
+<th>Age</th>
+<th>Prediction</th>
+<th>Confidence</th>
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+{% if data %}
+
+{% for row in data %}
+
+<tr>
+
+<td>{{ row[0] }}</td>
+
+<td>{{ row[1] }}</td>
+
+<td>{{ row[3] }}</td>
+
+<td>{{ row[9] }}</td>
+
+<td>{{ row[10] }}%</td>
+
+<td>
+
+<a href="/delete/{{ row[0] }}" class="delete-btn">
+
+Delete
+
+</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+{% else %}
+
+<tr>
+
+<td colspan="6">
+
+No Patient Found
+
+</td>
+
+</tr>
+
+{% endif %}
+
+</tbody>
+
+</table>
+
+</section>
+
+<footer>
+
+© 2026 GlucoAI |
+Developed by Mahima Mishra
+
+</footer>
+
+</body>
+
+</html>
+

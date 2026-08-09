@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prediction | GlucoAI</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+
+</head>
+
+<body>
+
+<!-- Navbar -->
+
+<nav>
+
+<div class="logo">
+<i class="fa-solid fa-heart-pulse"></i>
+GlucoAI
+</div>
+
+<ul>
+
+<li><a href="/">Home</a></li>
+
+<li><a href="/predict">Prediction</a></li>
+
+<li><a href="/history">History</a></li>
+
+<li><a href="/dashboard">Dashboard</a></li>
+
+<li><a href="/about">About</a></li>
+
+</ul>
+
+</nav>
+
+<!-- Header -->
+
+<section class="page-title">
+
+<h1>AI Diabetes Prediction</h1>
+
+<p>
+
+Fill in the patient's medical details below to predict
+the likelihood of diabetes using Machine Learning.
+
+</p>
+
+</section>
+
+<!-- Prediction Form -->
+
+<section class="predict-container">
+
+<div class="predict-card">
+
+<h2>Patient Information</h2>
+
+<form action="/predict" method="POST">
+
+<div class="row">
+
+<div class="input-box">
+
+<label>Patient Name</label>
+
+<input type="text"
+name="name"
+placeholder="Enter Patient Name"
+required>
+
+</div>
+
+<div class="input-box">
+
+<label>Gender</label>
+
+<select name="gender">
+
+<option value="Male">Male</option>
+
+<option value="Female">Female</option>
+
+</select>
+
+</div>
+
+</div>
+
+<div class="row">
+
+<div class="input-box">
+
+<label>Age</label>
+
+<input type="number"
+name="age"
+required>
+
+</div>
+
+<div class="input-box">
+
+<label>BMI</label>
+
+<input type="number"
+step="0.1"
+name="bmi"
+required>
+
+</div>
+
+</div>
+
+<div class="row">
+
+<div class="input-box">
+
+<label>HbA1c Level</label>
+
+<input type="number"
+step="0.1"
+name="hba1c"
+required>
+
+</div>
+
+<div class="input-box">
+
+<label>Blood Glucose</label>
+
+<input type="number"
+name="glucose"
+required>
+
+</div>
+
+</div>
+
+<div class="row">
+
+<div class="input-box">
+
+<label>Smoking History</label>
+
+<select name="smoking_history">
+
+<option>never</option>
+
+<option>former</option>
+
+<option>current</option>
+
+<option>not current</option>
+
+<option>No Info</option>
+
+</select>
+
+</div>
+
+<div class="input-box">
+
+<label>Hypertension</label>
+
+<select name="hypertension">
+
+<option value="0">No</option>
+
+<option value="1">Yes</option>
+
+</select>
+
+</div>
+
+</div>
+
+<div class="row">
+
+<div class="input-box">
+
+<label>Heart Disease</label>
+
+<select name="heart_disease">
+
+<option value="0">No</option>
+
+<option value="1">Yes</option>
+
+</select>
+
+</div>
+
+</div>
+
+<button type="submit">
+
+<i class="fa-solid fa-stethoscope"></i>
+
+Predict Diabetes
+
+</button>
+
+</form>
+
+</div>
+
+</section>
+
+<footer>
+
+<p>
+
+© 2026 GlucoAI | Developed by Mahima Mishra
+
+</p>
+
+</footer>
+
+</body>
+</html>
