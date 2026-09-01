@@ -1,4 +1,4 @@
 function Predict(){
     
-    window.location.href = "templates/predict.html"
+    window.location.href = "screen/prediction.html"
 }
